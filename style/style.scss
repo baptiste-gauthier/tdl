@@ -1,0 +1,15 @@
+* {
+    margin : 0; 
+    padding: 0;
+    box-sizing: border-box;
+}
+
+$color1 : rgb(41, 243, 41) ; 
+$color2 : rgb(241, 55, 55) ;
+
+.success{
+    color : $color1; 
+}
+.error{
+    color : $color2; 
+}
