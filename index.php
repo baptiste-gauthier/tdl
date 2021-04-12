@@ -17,11 +17,13 @@
             <section id="btn_choice">
                 <button id="crea_compte"> Créez un compte </button>
                 <button id="ins_compte"> Se connecter </button>
+                <button id="test_json"> Json maggle </button>
             </section>
 
             <section id="form">
             </section>
             <div class="msg"></div>
+            <div class="test_json"></div>
         </main>
 
         <footer>

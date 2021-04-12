@@ -18,8 +18,15 @@ $requete->execute();
 
 $result = $requete->fetchAll(PDO::FETCH_ASSOC) ;
 
-if(empty($result))
-echo 'error_log' ;
+if(!empty($login) && !empty($pass))
+{
+    if(empty($result))
+    echo 'error_log' ;
+    else
+    echo 'ok' ;
+}
 else
-echo 'ok' ;
+{
+    echo 'champs_vides';     
+}
 
