@@ -85,7 +85,6 @@ $(document).on('click' , '#btn_connexion', function (){
             {
                 $('.msg').append("<p class=\"success\"> Connexion réussi ! Vous allez être redirigé vers votre Todolist </p>");
                 sessionStorage.setItem("login", login) ; 
-                sessionStorage.setItem("pass", pass) ; 
 
                 setTimeout(function () {
                     window.location = "todolist.php"; 
@@ -135,7 +134,7 @@ $("#add_task").click(function (e) {
         $('.error_msg').append('<p class="error"> Veuillez écrire une tache </p>') ;
     }
     else{
-        $('#todo_list').append('<li id="li_task">'+ $('#task').val() +' le ' + date_complete +'<i class="fa fa-times"></i></li>') ;
+        $('#todo_list').append('<li id="li_task">'+ $('#task').val() +' le ' + date_complete +'<i class="fa fa-times" id="croix"></i></li>') ;
         $("#task").val('') ; 
 
         sessionStorage.setItem("session_task" , $('#todo_list').html()) ; // ajout session storage des tasks 
@@ -165,8 +164,30 @@ window.addEventListener("load", function(event) {
     $('#todo_list').append(sessionStorage.getItem("session_task")) ; // affichage de ses tasks, enregistrer jusqu'à la déco 
 });
 
+//deco 
+
+$('#deco').on("click" , function (e) {
+
+    var list = encodeURIComponent($('#todo_list').html()) ;
+    $.ajax({
+        type: "GET",
+        url: "addlist_bdd.php",
+        data: "list=" + list,
+        dataType: "html",
+        success: function (response) {
+            console.log(response) ;
+            sessionStorage.clear() ; 
+            window.location = 'index.php' ; 
+        }
+    });
+})
+
 // remove une tache 
 
+$(document).on("click" , "#croix" , (e) => {
+    $("#croix").parent().remove() ; 
+    sessionStorage.setItem("session_task", $('#todo_list').html());
+})
 
 
 

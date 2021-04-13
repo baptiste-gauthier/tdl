@@ -1,3 +1,8 @@
+<?php
+session_start() ; 
+echo $_SESSION['login'] ; 
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -12,7 +17,7 @@
 
     <body>
         <header>
-            Le header
+            <button id="deco"> deconnexion </button>
         </header>    
 
         <body>

@@ -1,5 +1,5 @@
 <?php
-
+session_start(); 
 $login = $_POST['login'] ; 
 $pass = $_POST['pass'] ; 
 
@@ -23,6 +23,7 @@ if(!empty($login) && !empty($pass))
     if(empty($result))
     echo 'error_log' ;
     else
+    $_SESSION['login'] = $login ; 
     echo 'ok' ;
 }
 else
