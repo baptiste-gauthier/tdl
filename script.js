@@ -124,19 +124,21 @@ var date_complete = day + ' ' + now.getDate() + ' ' + now.getFullYear() + ' à '
 console.log("hours", now.getHours());  
 console.log("minutes", now.getMinutes());  
 
-
-
-
 $("#add_task").click(function (e) { 
-    e.preventDefault();
-    console.log($('#task').val()) ; 
+    e.preventDefault(); 
+    $('.error_msg').empty() ; 
+    
+    
     if($('#task').val() == "")
     {
-        $('.error_msg').empty() ; 
+        // $('.error_msg').empty() ; 
         $('.error_msg').append('<p class="error"> Veuillez écrire une tache </p>') ;
     }
     else{
         $('#todo_list').append('<li id="li_task">'+ $('#task').val() +' le ' + date_complete +'<i class="fa fa-times"></i></li>') ;
+        $("#task").val('') ; 
+
+        sessionStorage.setItem("session_task" , $('#todo_list').html()) ; // ajout session storage des tasks 
     }
 });
 
@@ -159,7 +161,12 @@ $('#test_json').click( function (e) {
 
 
 window.addEventListener("load", function(event) {
-    $('.titre_todo').append("<p> Bonjour, " + sessionStorage.getItem("login") + "</p>") ; 
-  });
+    $('.titre_todo').append("<p> Bonjour, " + sessionStorage.getItem("login") + "</p>") ; // Nom de la personne connecter 
+    $('#todo_list').append(sessionStorage.getItem("session_task")) ; // affichage de ses tasks, enregistrer jusqu'à la déco 
+});
+
+// remove une tache 
+
+
 
 
