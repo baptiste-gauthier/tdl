@@ -83,6 +83,7 @@ $(document).on('click' , '#btn_connexion', function (){
         success: function (response) {
             if(response == "ok")
             {
+                
                 $('.msg').append("<p class=\"success\"> Connexion réussi ! Vous allez être redirigé vers votre Todolist </p>");
                 sessionStorage.setItem("login", login) ; 
 
@@ -160,7 +161,7 @@ $('#test_json').click( function (e) {
 
 
 window.addEventListener("load", function(event) {
-    $('.titre_todo').append("<p> Bonjour, " + sessionStorage.getItem("login") + "</p>") ; // Nom de la personne connecter 
+    $('.titre_todo').append("<p id=\"msg_bonjour\"> Bonjour, " + sessionStorage.getItem("login") + "</p>") ; // Nom de la personne connecter 
     $('#todo_list').append(sessionStorage.getItem("session_task")) ; // affichage de ses tasks, enregistrer jusqu'à la déco 
 });
 
@@ -175,7 +176,7 @@ $('#deco').on("click" , function (e) {
         data: "list=" + list,
         dataType: "html",
         success: function (response) {
-            $('#todo_list').append(response);
+            // $('#todo_list').append(response);
             sessionStorage.clear() ; 
             window.location = 'index.php' ; 
         }
@@ -185,9 +186,30 @@ $('#deco').on("click" , function (e) {
 // remove une tache 
 
 $(document).on("click" , "#croix" , (e) => {
-    $("#croix").parent().remove() ; 
-    sessionStorage.setItem("session_task", $('#todo_list').html());
+    e.currentTarget.parentElement.classList.add("animate__animated","animate__bounceOutDown");
+        setTimeout(() => {
+            $("#croix").parent().remove() ; 
+            e.currentTarget.parentElement.classList.remove("animate__animated","animate__bounceOutDown");
+            sessionStorage.setItem("session_task", $('#todo_list').html());
+        },1000) ;
+  
+  
 })
+
+// recupération des task dans la bdd 
+
+window.addEventListener("load", function(event) {
+   $.ajax({
+       type: "GET",
+       url: "get_task.php",
+       dataType: "json",
+       success: function (response) {
+           $('#todo_list').append(response.description); 
+       }
+   });
+});
+
+
 
 
 
