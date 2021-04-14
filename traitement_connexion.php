@@ -5,7 +5,7 @@ $pass = $_POST['pass'] ;
 
 $bdd = new PDO('mysql:host=localhost;dbname=tdl', 'root', '');
 
-$requete = $bdd->prepare("SELECT login,pass
+$requete = $bdd->prepare("SELECT *
                             FROM utilisateurs
                                 WHERE login = :login
                                     AND pass = :pass
@@ -16,7 +16,7 @@ $requete->bindParam(':pass',$pass);
 
 $requete->execute(); 
 
-$result = $requete->fetchAll(PDO::FETCH_ASSOC) ;
+$result = $requete->fetch(PDO::FETCH_ASSOC) ;
 
 if(!empty($login) && !empty($pass))
 {
@@ -24,6 +24,7 @@ if(!empty($login) && !empty($pass))
     echo 'error_log' ;
     else
     $_SESSION['login'] = $login ; 
+    $_SESSION['id'] = $result['id'] ; 
     echo 'ok' ;
 }
 else

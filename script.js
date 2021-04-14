@@ -175,7 +175,7 @@ $('#deco').on("click" , function (e) {
         data: "list=" + list,
         dataType: "html",
         success: function (response) {
-            console.log(response) ;
+            $('#todo_list').append(response);
             sessionStorage.clear() ; 
             window.location = 'index.php' ; 
         }
