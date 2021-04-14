@@ -40,7 +40,7 @@
 }
 
 .contenu_todo .list li {
-  padding: 10px;
+  padding: 15px;
   background-color: #F2CEAE;
   margin: 5px;
   display: -webkit-box;
@@ -49,6 +49,21 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.contenu_todo .list li p {
+  margin: 0px 10px;
+}
+
+.contenu_todo .list li p i {
+  margin: 0px 10px;
+  color: white;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.contenu_todo .list li p i:hover {
+  color: #40352C;
 }
 
 .contenu_todo .titre_todo h1 {
@@ -61,6 +76,24 @@
 .contenu_todo .titre_todo p {
   font-size: 1.2em;
   margin: 5px 0px;
+}
+
+.contenu_todo .barre_todo label {
+  display: none;
+}
+
+.contenu_todo .barre_todo input[type="button"] {
+  padding: 10px;
+  text-transform: uppercase;
+  font-weight: 800;
+  border: 1px solid #40352C;
+  background-color: transparent;
+  color: #40352C;
+  cursor: pointer;
+}
+
+.contenu_todo .barre_todo input[type="text"] {
+  padding: 10px;
 }
 
 #btn_choice button {

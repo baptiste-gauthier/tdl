@@ -135,7 +135,7 @@ $("#add_task").click(function (e) {
         $('.error_msg').append('<p class="error"> Veuillez écrire une tache </p>') ;
     }
     else{
-        $('#todo_list').append('<li id="li_task">'+ $('#task').val() +' le ' + date_complete +'<i class="fa fa-times" id="croix"></i></li>') ;
+        $('#todo_list').append('<li id="li_task"><p class="my_taks">'+ $('#task').val() +' le ' + date_complete +'</p><p class="cross_check"><i class="fa fa-check"></i><i class="fa fa-times" id="croix"></i></p></li>') ;
         $("#task").val('') ; 
 
         sessionStorage.setItem("session_task" , $('#todo_list').html()) ; // ajout session storage des tasks 
@@ -186,12 +186,12 @@ $('#deco').on("click" , function (e) {
 // remove une tache 
 
 $(document).on("click" , "#croix" , (e) => {
-    e.currentTarget.parentElement.classList.add("animate__animated","animate__bounceOutDown");
+    e.currentTarget.parentElement.parentElement.classList.add("animate__animated","animate__bounceOutDown");
         setTimeout(() => {
-            $("#croix").parent().remove() ; 
-            e.currentTarget.parentElement.classList.remove("animate__animated","animate__bounceOutDown");
+            $("#croix").parent().parent().remove() ; 
+            e.currentTarget.parentElement.parentElement.classList.remove("animate__animated","animate__bounceOutDown");
             sessionStorage.setItem("session_task", $('#todo_list').html());
-        },1000) ;
+        },900) ;
   
   
 })

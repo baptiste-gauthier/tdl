@@ -28,10 +28,10 @@ session_start() ;
                     </div>
                     <div class="barre_todo">
               
-                            <label for="task"> Ajouter un tache </label>
-                            <input type="text" name="task" id="task">
+                            <label for="task"> Ajouter un tache :</label>
+                            <input type="text" name="task" id="task" placeholder="Ma tache...">
 
-                            <input type="button" value="add" id="add_task">
+                            <input type="button" value="ajouter" id="add_task">
                         
                     </div>
                     <div class="list">
