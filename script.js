@@ -83,6 +83,7 @@ $(document).on('click' , '#btn_connexion', function (){
         data: {login : login , pass : pass},
         dataType: "html",
         success: function (response) {
+            console.log(response)
             if(response == "ok")
             {
                 

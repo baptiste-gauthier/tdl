@@ -21,11 +21,15 @@ $result = $requete->fetch(PDO::FETCH_ASSOC) ;
 if(!empty($login) && !empty($pass))
 {
     if(empty($result))
-    echo 'error_log' ;
+    {
+        echo 'error_log' ;
+    }
     else
-    $_SESSION['login'] = $login ; 
-    $_SESSION['id'] = $result['id'] ; 
-    echo 'ok' ;
+    {
+        $_SESSION['login'] = $login ; 
+        $_SESSION['id'] = $result['id'] ; 
+        echo 'ok' ;
+    }
 }
 else
 {
