@@ -40,6 +40,11 @@ session_start() ;
                         </ul>
                         <div class="error_msg"></div>
                     </div>
+                    <div id="finish_task">
+                        <p> Voir les taches terminés<i class="fa fa-chevron-down"></i> </p>
+                        <ul id="list_finish">
+                        </ul>   
+                    </div>
                 </article>
             </section>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -47,7 +52,7 @@ session_start() ;
         </body>
 
         <footer>
-            Le footer
+        
         </footer>
     </body>
 

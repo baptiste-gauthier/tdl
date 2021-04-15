@@ -1,4 +1,4 @@
-// apparition formulaire de connexion 
+// apparition formulaire de d'inscription
 
 $(document).on("click", '#crea_compte' ,function () {
 
@@ -13,8 +13,9 @@ $(document).on("click", '#crea_compte' ,function () {
         }
     });
 })
+// apparition formulaire de connexion 
 
-$(document).on("click", '#ins_compte' ,function () {
+$(document).on("click", '.se_connecter' ,function () {
 
     $("#form").empty();
     $('.msg').empty();  
@@ -28,6 +29,7 @@ $(document).on("click", '#ins_compte' ,function () {
     });
 })
 
+// inscription 
 
 $(document).on('click' , '#btn_inscription', function (){
 
@@ -44,7 +46,7 @@ $(document).on('click' , '#btn_inscription', function (){
         dataType: "html",
         success: function (response) {
             if(response == "yes"){
-               $('.msg').append("<p class=\"success\"> Inscription réussie !</p>");
+               $('.msg').append("<p class=\"success\"> Inscription réussie !</p><p class=\"se_connecter\"> Se connecter </p>");
             }
             else if(response == "mdp_diff")
             {
@@ -66,7 +68,7 @@ $(document).on('click' , '#btn_inscription', function (){
     });
 })
 
-
+//connexion
 
 $(document).on('click' , '#btn_connexion', function (){
 
@@ -103,7 +105,9 @@ $(document).on('click' , '#btn_connexion', function (){
     });
 })
 
-// todolist 
+//------------------------------ todolist 
+
+// Ajout tache touche Enter
 
 $('#task').keydown(function(e) {
     if(e.key == 'Enter')
@@ -124,6 +128,8 @@ var date_complete = day + ' ' + now.getDate() + ' ' + now.getFullYear() + ' à '
 console.log("hours", now.getHours());  
 console.log("minutes", now.getMinutes());  
 
+// ajoute la tache dans le ul + met a jour le contenu en session storage
+
 $("#add_task").click(function (e) { 
     e.preventDefault(); 
     $('.error_msg').empty() ; 
@@ -135,34 +141,30 @@ $("#add_task").click(function (e) {
         $('.error_msg').append('<p class="error"> Veuillez écrire une tache </p>') ;
     }
     else{
-        $('#todo_list').append('<li id="li_task"><p class="my_taks">'+ $('#task').val() +' le ' + date_complete +'</p><p class="cross_check"><i class="fa fa-check"></i><i class="fa fa-times" id="croix"></i></p></li>') ;
+        $('#todo_list').append('<li id="li_task"><p class="my_taks"><span id="txt_tache">'+ $('#task').val() +'</span><span id="txt_date"> le ' + date_complete +'</span></p><p class="cross_check"><i class="fa fa-check" id="check"></i><i class="fa fa-times" id="croix"></i></p></li>') ;
+        var list = encodeURIComponent($('#todo_list').html()) ;
+        $.ajax({
+            type: "GET",
+            url: "addlist_bdd.php",
+            data: "list=" + list,
+            dataType: "html",
+            success: function (response) {
+                // $('#todo_list').append(response);
+                // sessionStorage.clear() ; 
+                console.log(response); 
+            }
+        });
         $("#task").val('') ; 
 
         sessionStorage.setItem("session_task" , $('#todo_list').html()) ; // ajout session storage des tasks 
     }
 });
 
-$('#test_json').click( function (e) {
-
-    $.ajax({
-        type: "GET",
-        url: "utilisateurs_json.php",
-        dataType: "json",
-        success: function (response) {
-            console.log("oh") ; 
-            console.log(response) ; 
-
-            var nom = response[0].login ; 
-            $('.test_json').append("<p>" + nom + "</p>") ; 
-        }
-        
-    });
-})
 
 
 window.addEventListener("load", function(event) {
     $('.titre_todo').append("<p id=\"msg_bonjour\"> Bonjour, " + sessionStorage.getItem("login") + "</p>") ; // Nom de la personne connecter 
-    $('#todo_list').append(sessionStorage.getItem("session_task")) ; // affichage de ses tasks, enregistrer jusqu'à la déco 
+    // $('#todo_list').append(sessionStorage.getItem("session_task")) ; 
 });
 
 //deco 
@@ -186,28 +188,88 @@ $('#deco').on("click" , function (e) {
 // remove une tache 
 
 $(document).on("click" , "#croix" , (e) => {
+    
     e.currentTarget.parentElement.parentElement.classList.add("animate__animated","animate__bounceOutDown");
         setTimeout(() => {
-            $("#croix").parent().parent().remove() ; 
+            // $("#croix").parent().parent().remove() ; 
+            e.currentTarget.parentElement.parentElement.remove() ; 
             e.currentTarget.parentElement.parentElement.classList.remove("animate__animated","animate__bounceOutDown");
-            sessionStorage.setItem("session_task", $('#todo_list').html());
-        },900) ;
+            // sessionStorage.setItem("session_task", $('#todo_list').html());
+            console.log($('#todo_list').html()) ;
+            var list = encodeURIComponent($('#todo_list').html()) ;
+            $.ajax({
+                type: "GET",
+                url: "addlist_bdd.php",
+                data: "list=" + list,
+                dataType: "html",
+                success: function (response) {
+                    sessionStorage.setItem("session_task" , $('#todo_list').html()) ; 
+                }
+            })
+        },900) 
   
   
 })
 
-// recupération des task dans la bdd 
+
+// recupération des task dans la bdd + append dans le ul 
 
 window.addEventListener("load", function(event) {
-   $.ajax({
-       type: "GET",
-       url: "get_task.php",
-       dataType: "json",
-       success: function (response) {
-           $('#todo_list').append(response.description); 
-       }
-   });
+    $.ajax({
+        type: "GET",
+        url: "get_task.php",
+        dataType: "json",
+        success: function (response) {
+            console.log(response)
+            $('#todo_list').append(response.description); 
+        }
+    });
 });
+
+window.addEventListener("load", function(event) {
+    $.ajax({
+        type: "GET",
+        url: "get_finish_task.php",
+        dataType: "json",
+        success: function (response) {
+            console.log(response)
+            $('#list_finish').append(response.finish_tasks); 
+        }
+    });
+});
+
+// tache check 
+
+$(document).on("click" , "#check" , (e) => {
+    // e.currentTarget.parentElement.parentElement.append("#list_finish") ; 
+    // console.log(e.currentTarget.parentElement.parentElement) ;
+    $('#list_finish').append(e.currentTarget.parentElement.parentElement) ;
+    e.currentTarget.parentElement.parentElement.append("<p>" + date_complete + "</p>");  
+
+    var list_check = encodeURIComponent($('#list_finish').html()); 
+
+    $.ajax({
+        type: "GET",
+        url: "add_finish_list.php",
+        data: "list=" + list_check ,
+        dataType: "html",
+        success: function (response) {
+            var list = encodeURIComponent($('#todo_list').html()) ;
+            $.ajax({
+                type: "GET",
+                url: "addlist_bdd.php",
+                data: "list=" + list,
+                dataType: "html",
+                success: function (response) {
+                    sessionStorage.setItem("session_task" , $('#todo_list').html()) ;
+                }
+            })
+        }
+    });
+})
+
+
+
 
 
 

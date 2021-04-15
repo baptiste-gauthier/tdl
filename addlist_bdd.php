@@ -16,13 +16,13 @@ $requete->execute();
 
 $result = $requete->fetch() ;
 
-var_dump($result) ; 
+// var_dump($result) ; 
 
 if($result == false)
 {
     $sql = 'INSERT INTO taches (utilisateur_fk, description) VALUES (:id, :get)';
 
-    var_dump($sql) ; 
+    // var_dump($sql) ; 
 
     $requete = $bdd->prepare($sql);
 

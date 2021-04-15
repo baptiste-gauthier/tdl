@@ -14,24 +14,24 @@ session_start() ;
 
     <body>
         <header>
-            Le header 
+            <section id="btn_choice">
+                <button id="crea_compte"> Créez un compte </button>
+                <button id="ins_compte" class="se_connecter"> Se connecter </button>
+            </section>
+            <div class="logo_todo">
+                <img src="images/logo.svg" alt="logo">
+            </div>
         </header>        
 
         <main>
-            <section id="btn_choice">
-                <button id="crea_compte"> Créez un compte </button>
-                <button id="ins_compte"> Se connecter </button>
-                <button id="test_json"> Json maggle </button>
-            </section>
 
             <section id="form">
             </section>
             <div class="msg"></div>
-            <div class="test_json"></div>
+           
         </main>
 
         <footer>
-            le footer 
         </footer>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

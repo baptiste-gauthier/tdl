@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,100;1,300;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;800&display=swap');
 
 /* Color Theme Swatches in Hex */
@@ -41,6 +41,44 @@ $color2 : red ;
 .error{
     color : $color2; 
 }
+.msg{
+    text-align: center;
+    margin: 25px;
+
+    & .se_connecter{
+        margin: 10px 0px;
+        text-decoration: underline;
+    }
+}
+
+body{
+    padding: 20px;
+}
+
+// header 
+
+header{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    #deco{
+        padding: 10px;
+        text-transform: uppercase;
+        font-weight: 800;
+        border : none; 
+        background-color: $Nature-2-hsla;
+        color: white;
+        cursor: pointer;
+    }
+    .logo_todo{
+        padding: 10px;
+        img{
+            width: 35%; 
+            margin: auto; 
+        }
+    }
+}
 
 // todolist 
 
@@ -48,6 +86,14 @@ $color2 : red ;
     display: flex;
     flex-direction: column;
     align-items: center;
+    
+    &::after{
+        content: "" ; 
+        background-color: $Nature-2-hex;
+        width: 10%;
+        height: 2px; 
+        border-radius: 2em;
+    }
     
     div {
         padding: 10px ; 
@@ -57,11 +103,19 @@ $color2 : red ;
         li{
             padding: 15px;
             background-color: $Nature-3-hex;
-            margin: 5px;
+            margin: 10px;
             display: flex;
             justify-content: space-between;
             p{
                 margin : 0px 10px ;
+                & #txt_tache{
+                    font-weight: 800;
+                    margin-right : 10px ; 
+                }
+                & #txt_date{
+                    font-style: italic;
+                    font-weight: 300;
+                }
                 i{
                     margin : 0px 10px ;
                     color: white;
@@ -103,6 +157,26 @@ $color2 : red ;
             padding: 10px;
         }
     }
+    #finish_task {
+        p{
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            i{
+                padding: 10px;
+            }
+        }
+        #list_finish{
+            li{
+                #txt_date{
+                    display: none;
+                }
+                .cross_check{
+                    display: none;
+                }
+            }
+        }
+    }
     
 }
 
@@ -113,16 +187,19 @@ $color2 : red ;
 
 #btn_choice {
     button {
-        border: none ; 
-        background-color: $Nature-3-hsla;
-        color : white ; 
+        border: 1px solid $Nature-2-hex ; 
+        background-color: transparent;
+        color : $Nature-2-hex; 
         text-transform: uppercase;
         padding: 10px;
         transition: .2s;
+        font-weight: 800;
 
         &:hover
         {
-            background-color: black;
+            background-color: $Nature-2-hex;
+            cursor: pointer;
+            color: white;
         }
 
     }
@@ -134,8 +211,6 @@ $color2 : red ;
     .form {
         display: flex ; 
         flex-direction: column;
-        
-
         width: 30%;
         margin: auto;
 
