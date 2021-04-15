@@ -244,7 +244,8 @@ $(document).on("click" , "#check" , (e) => {
     // e.currentTarget.parentElement.parentElement.append("#list_finish") ; 
     // console.log(e.currentTarget.parentElement.parentElement) ;
     $('#list_finish').append(e.currentTarget.parentElement.parentElement) ;
-    e.currentTarget.parentElement.parentElement.append("<p>" + date_complete + "</p>");  
+    e.currentTarget.parentElement.parentElement.append(date_complete);  
+    console.log(e.currentTarget.parentElement.parentElement) ;
 
     var list_check = encodeURIComponent($('#list_finish').html()); 
 
@@ -268,8 +269,42 @@ $(document).on("click" , "#check" , (e) => {
     });
 })
 
+// deroulage de la liste des taches terminées 
 
+$(document).on("click" , "#click_finish", (e) => {
+  
+    if($('#finish_task').attr('style') == "display: none ;")
+    {
+        $('#finish_task').attr("style" , "display: flex ;"); 
+    }
+    else{
+        $('#finish_task').attr("style" , "display: none ;");
+    }
+})
 
+$(document).on("click", "#supp_task", (e) => {
+   $('#list_finish li').remove(); 
+   var list_check = encodeURIComponent($('#list_finish').html()); 
+
+    $.ajax({
+        type: "GET",
+        url: "add_finish_list.php",
+        data: "list=" + list_check ,
+        dataType: "html",
+        success: function (response) {
+            var list = encodeURIComponent($('#todo_list').html()) ;
+            $.ajax({
+                type: "GET",
+                url: "addlist_bdd.php",
+                data: "list=" + list,
+                dataType: "html",
+                success: function (response) {
+                    sessionStorage.setItem("session_task" , $('#todo_list').html()) ;
+                }
+            })
+        }
+    });
+})
 
 
 

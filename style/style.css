@@ -159,6 +159,16 @@ header .logo_todo img {
   padding: 10px;
 }
 
+.contenu_todo #finish_task {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 .contenu_todo #finish_task p {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -173,12 +183,46 @@ header .logo_todo img {
   padding: 10px;
 }
 
+.contenu_todo #finish_task #list_finish li {
+  text-align: center;
+  margin: 5px 0px;
+  background-color: #40352C;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 15px;
+  color: white;
+}
+
 .contenu_todo #finish_task #list_finish li #txt_date {
   display: none;
 }
 
+.contenu_todo #finish_task #list_finish li #txt_tache {
+  font-weight: 700;
+  padding: 10px;
+}
+
 .contenu_todo #finish_task #list_finish li .cross_check {
   display: none;
+}
+
+.contenu_todo #finish_task > p {
+  padding: 15px;
+  margin-bottom: 10px;
+  text-decoration: underline;
+}
+
+.contenu_todo #click_finish {
+  padding: 10px;
+  margin: 5px;
+}
+
+.contenu_todo #click_finish i {
+  margin: 0px 10px;
 }
 
 #btn_choice button {

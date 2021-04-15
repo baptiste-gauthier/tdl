@@ -40,10 +40,11 @@ session_start() ;
                         </ul>
                         <div class="error_msg"></div>
                     </div>
-                    <div id="finish_task">
-                        <p> Voir les taches terminés<i class="fa fa-chevron-down"></i> </p>
+                    <p id="click_finish"> Voir les taches terminés<i class="fa fa-chevron-down"></i> </p>
+                    <div id="finish_task" style="display: none ;">
                         <ul id="list_finish">
                         </ul>   
+                        <p id="supp_task"> Supprimer les taches terminées </p>
                     </div>
                 </article>
             </section>

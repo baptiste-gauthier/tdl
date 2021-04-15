@@ -158,6 +158,8 @@ header{
         }
     }
     #finish_task {
+        display: flex;
+        flex-direction: column;
         p{
             display: flex;
             align-items: center;
@@ -167,14 +169,40 @@ header{
             }
         }
         #list_finish{
+            
             li{
+                text-align: center;
+                margin :5px 0px; 
+                background-color: $Nature-2-hex;
+                display: flex;
+                align-items: center;
+                padding: 15px;
+                color: white;
                 #txt_date{
                     display: none;
+                }
+                #txt_tache{
+                    font-weight: 700;
+                    padding: 10px;
                 }
                 .cross_check{
                     display: none;
                 }
             }
+            
+            
+        }
+        & > p{
+            padding: 15px;
+            margin-bottom: 10px;
+            text-decoration: underline;
+        }
+    }
+    #click_finish{
+        padding: 10px;
+        margin:5px;
+        i{
+            margin: 0px 10px;
         }
     }
     
