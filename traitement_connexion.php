@@ -1,22 +1,14 @@
 <?php
+
 session_start(); 
+require_once('models/Model.php') ; 
+
+$model = new Model ; 
+
 $login = $_POST['login'] ; 
 $pass = $_POST['pass'] ; 
 
-$bdd = new PDO('mysql:host=localhost;dbname=tdl', 'root', '');
-
-$requete = $bdd->prepare("SELECT *
-                            FROM utilisateurs
-                                WHERE login = :login
-                                    AND pass = :pass
-"); 
-
-$requete->bindParam(':login',$login); 
-$requete->bindParam(':pass',$pass);
-
-$requete->execute(); 
-
-$result = $requete->fetch(PDO::FETCH_ASSOC) ;
+$result = $model->connexionUser($login,$pass) ;
 
 if(!empty($login) && !empty($pass))
 {
