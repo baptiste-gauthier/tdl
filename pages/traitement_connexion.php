@@ -1,7 +1,7 @@
 <?php
 
 session_start(); 
-require_once('models/Model.php') ; 
+require_once('../models/Model.php') ; 
 
 $model = new Model ; 
 

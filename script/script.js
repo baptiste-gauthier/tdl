@@ -6,7 +6,7 @@ $(document).on("click", '#crea_compte' ,function () {
     $('.msg').empty();  
     $.ajax({
         type: "GET",
-        url: "inscription.php",
+        url: "pages/inscription.php",
 
     success: function (response) {
             $("#form").append(response)
@@ -21,7 +21,7 @@ $(document).on("click", '.se_connecter' ,function () {
     $('.msg').empty();  
     $.ajax({
         type: "GET",
-        url: "connexion.php",
+        url: "pages/connexion.php",
 
     success: function (response) {
             $("#form").append(response)
@@ -41,7 +41,7 @@ $(document).on('click' , '#btn_inscription', function (){
 
     $.ajax({
         type: "POST",
-        url: "traitement_inscription.php",
+        url: "pages/traitement_inscription.php",
         data: {login : login , pass : pass , confirm_pass: confirm_pass},
         dataType: "html",
         success: function (response) {
@@ -79,7 +79,7 @@ $(document).on('click' , '#btn_connexion', function (){
 
     $.ajax({
         type: "POST",
-        url: "traitement_connexion.php",
+        url: "pages/traitement_connexion.php",
         data: {login : login , pass : pass},
         dataType: "html",
         success: function (response) {
@@ -91,7 +91,7 @@ $(document).on('click' , '#btn_connexion', function (){
                 sessionStorage.setItem("login", login) ; 
 
                 setTimeout(function () {
-                    window.location = "todolist.php"; 
+                    window.location = "pages/todolist.php"; 
                  }, 2000); 
             }
             else if(response == "error_log")
@@ -181,7 +181,7 @@ $('#deco').on("click" , function (e) {
         success: function (response) {
             // $('#todo_list').append(response);
             sessionStorage.clear() ; 
-            window.location = 'index.php' ; 
+            window.location = 'logout.php' ; 
         }
     });
 })
